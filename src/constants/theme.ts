@@ -1,26 +1,36 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
-import '@/global.css';
-
 import { Platform } from 'react-native';
+
+export const Palette = {
+  deepNavy: '#101828',
+  darkSurface: '#182338',
+  warmIvory: '#F8F6F0',
+  mutedGold: '#C6A96B',
+  primaryText: '#182338',
+  secondaryText: '#667085',
+  whiteCards: '#FFFFFF',
+  cardBorder: '#E4E7EC',
+  badgeBg: '#F2EDE4',
+  success: '#12B76A',
+  danger: '#F04438',
+  lightGrayBg: '#F4F5F7',
+} as const;
 
 export const Colors = {
   light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
+    text: Palette.primaryText,
+    background: Palette.warmIvory,
+    backgroundElement: '#ECE8DF',
+    backgroundSelected: '#E0D8C8',
+    textSecondary: Palette.secondaryText,
+    tint: Palette.mutedGold,
   },
   dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
+    text: '#FFFFFF',
+    background: Palette.deepNavy,
+    backgroundElement: Palette.darkSurface,
+    backgroundSelected: '#253550',
+    textSecondary: '#98A2B3',
+    tint: Palette.mutedGold,
   },
 } as const;
 
@@ -28,13 +38,9 @@ export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
 export const Fonts = Platform.select({
   ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
     sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
     serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
     rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
     mono: 'ui-monospace',
   },
   default: {
@@ -44,10 +50,10 @@ export const Fonts = Platform.select({
     mono: 'monospace',
   },
   web: {
-    sans: 'var(--font-display)',
-    serif: 'var(--font-serif)',
-    rounded: 'var(--font-rounded)',
-    mono: 'var(--font-mono)',
+    sans: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+    serif: 'Georgia, Cambria, "Times New Roman", Times, serif',
+    rounded: 'system-ui, sans-serif',
+    mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
   },
 });
 
@@ -61,5 +67,31 @@ export const Spacing = {
   six: 64,
 } as const;
 
+export const CardShadow = Platform.select({
+  web: {
+    boxShadow: '0px 2px 8px rgba(16, 24, 40, 0.06)',
+  },
+  default: {
+    shadowColor: '#101828',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+});
+
+export const ElevatedShadow = Platform.select({
+  web: {
+    boxShadow: '0px 4px 16px rgba(16, 24, 40, 0.12)',
+  },
+  default: {
+    shadowColor: '#101828',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 10,
+    elevation: 6,
+  },
+});
+
 export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
-export const MaxContentWidth = 800;
+export const MaxContentWidth = 840;
